@@ -27,8 +27,8 @@ class product(models.Model):
 
     def __str__(self):
         return self.productName
+   
     
-
 class movie(models.Model):
     Name=models.CharField( max_length=50)
     # showTime=models.CharField(max_length=20)
