@@ -8,13 +8,13 @@ This project was developed as a Final Year Internship Project.
 
 ## 📋 Table of Contents
 
-* [Project Overview](#project-overview)
-* [Key Features](#key-features)
-* [Tech Stack](#tech-stack)
-* [Database Schema](#database-schema)
-* [Installation & Setup](#installation--setup)
-* [How to Run](#how-to-run)
-* [Screenshots](#screenshots)
+* [Project Overview](#-project-overview)
+* [Key Features](#-key-features)
+* [Tech Stack](#-tech-stack)
+* [Database Schema](#-database-schema)
+* [Installation & Setup](#-installation--setup)
+* [How to Run](#-how-to-run)
+* [Screenshots](#-screenshots)
 
 ---
 
