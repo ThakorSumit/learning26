@@ -21,39 +21,73 @@
         th {
             background-color: #f2f2f2;
         }
+
+        a {
+            color: blue;
+            margin: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: #f6f6f6;
+
+        }
+
+        table {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 
 <body>
+    <a href="{% url 'createemployee' %}">Create Employee</a>
+    <a href="{% url 'employeefilter' 1 %}">asc</a>
+    <a href="{% url 'employeefilter' 2 %}">desc</a>
+
     <h1>Employee list</h1>
     <table>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th>post</th>
                 <th>Age</th>
                 <th>Salary</th>
                 <th>join date</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             {% for emp in emp %}
             <tr>
+                <td>{{emp.id}}</td>
                 <td>{{emp.name}}</td>
                 <td>{{emp.post}}</td>
                 <td>{{emp.age}}</td>
                 <td>{{emp.salary}}</td>
                 <td>{{emp.join_date}}</td>
+                <td><a href="{% url 'deleteemployee' emp.id %}">Delete</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-<form method="POST">
-    {% csrf_token %}
-    <input style="" type="submit" value="submit">
-</form>
-    
+    <!-- <form method="POST">
+        {% csrf_token %}
+        <input type="submit" value="submit">
+    </form> -->
+
+
 
 </body>
 

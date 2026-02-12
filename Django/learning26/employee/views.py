@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 from .models import employee,course,college,ShopProduct
 from .form import EmployeeForm,CourseForm,collegeform,ProductForm
 # Create your views here.
@@ -9,22 +9,22 @@ def employeelist(request):
     print("emp1",emp1)
     return render(request,"employee/employee.html",{'emp':emp})
 
-def employeefilter(request):
-    emp=employee.objects.all().values()
-    emp2=employee.objects.filter(age__exact=23).values()
-    emp3=employee.objects.filter(post="Data Scientist").values()
-    emp4=employee.objects.filter(salary__gt=29000).values()
-    emp5=m=employee.objects.filter(name__icontains="It").values()
-    emp6=employee.objects.filter(age__range=(25,30)).values()
-    emp7=employee.objects.order_by("salary").values()
-    print("emp2",emp2)
-    print("emp3",emp3)
-    print("emp4",emp4)
-    print("emp5",emp5)
-    print("emp6",emp6)
-    print("emp7",emp7)
+# def employeefilter(request):
+#     emp=employee.objects.all().values()
+#     emp2=employee.objects.filter(age__exact=23).values()
+#     emp3=employee.objects.filter(post="Data Scientist").values()
+#     emp4=employee.objects.filter(salary__gt=29000).values()
+#     emp5=m=employee.objects.filter(name__icontains="It").values()
+#     emp6=employee.objects.filter(age__range=(25,30)).values()
+#     emp7=employee.objects.order_by("salary").values()
+#     print("emp2",emp2)
+#     print("emp3",emp3)
+#     print("emp4",emp4)
+#     print("emp5",emp5)
+#     print("emp6",emp6)
+#     print("emp7",emp7)
 
-    return render(request,"employee/employee.html",{'emp':emp})
+    # return HttpResponse("Employee filter successfully")
 
 def createEmployee(request):
     if request.method=="POST":
@@ -66,5 +66,18 @@ def createproduct(request):
     else:
         form=ProductForm()
         return render(request,"employee/createproduct.html",{'form':form})
+
+
+def deleteemployee(request,id):
+    employee.objects.get(id=id).delete()
+    return redirect("employeelist")
+
+
+def employeefilter(request,order):
+    if order=='1':
+        emp=employee.objects.order_by("age").values()
+    if order=='2':
+        emp=employee.objects.order_by("-age").values()
+    return render(request,"employee/employee.html",{'emp':emp})
 
 
