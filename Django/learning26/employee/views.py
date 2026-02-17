@@ -72,9 +72,9 @@ def deleteemployee(request,id):
 
 def employeefilter(request,order):
     if order=='1':
-        emp=employee.objects.order_by("age").values()
+        emp=employee.objects.order_by("salary").values()
     if order=='2':
-        emp=employee.objects.order_by("-age").values()
+        emp=employee.objects.order_by("-salary").values()
     return render(request,"employee/employee.html",{'emp':emp})
 
 
