@@ -4,9 +4,6 @@ from .form import EmployeeForm,CourseForm,collegeform,ProductForm
 # Create your views here.
 def employeelist(request):
     emp=employee.objects.all().order_by("id").values()
-    emp1=employee.objects.all().values_list()
-    print("emp",emp)
-    print("emp1",emp1)
     return render(request,"employee/employee.html",{'emp':emp})
 
 # def employeefilter(request):
@@ -31,8 +28,7 @@ def createEmployee(request):
         form=EmployeeForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse("Employee created successfully")
-            
+            return redirect("employeelist")
     else:
         form=EmployeeForm()
         return render(request,"employee/createemploye.html",{'form':form})
@@ -69,8 +65,9 @@ def createproduct(request):
 
 
 def deleteemployee(request,id):
-    employee.objects.get(id=id).delete()
-    return redirect("employeelist")
+       emp=employee.objects.get(id=id)
+       emp.delete()
+       return redirect("employeelist")
 
 
 def employeefilter(request,order):

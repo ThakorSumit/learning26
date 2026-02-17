@@ -1,0 +1,12 @@
+<nav class="navbar">
+    <div class="logo">
+        <a href="#">Employee Management</a>
+    </div>
+    <div class="nav-links">
+        <a href="{% url 'createemployee' %}">Create</a>
+        <a href="{% url 'employeelist' %}">Employee List</a>
+        <a href="{% url 'employeefilter' 1 %}">Asc</a>
+        <a href="{% url 'employeefilter' 2 %}">Desc</a>
+
+    </div>
+</nav>

@@ -1,4 +1,7 @@
-from django.shortcuts import render
+# Create your views here
+from django.shortcuts import render,redirect
+from .models import Student
+from .form import StudentForm
  
 def marks(request):
     return render(request,"student/marks.html")
@@ -14,4 +17,33 @@ def faculty(request):
           }
     return render(request,"student/faculty.html",data)
 
-# Create your views here.
+
+def studentlist(request):
+    data=Student.objects.all().order_by('id')
+    return render(request,"student/studentlist.html",{'data':data})
+
+def creatprofile(request):
+    if request.method=="POST":
+        form=StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('studentlist')
+    else:
+        form=StudentForm()
+    return render(request,"student/creatprofile.html",{'form':form})
+
+def deleteprofile(request,id):
+    Student.objects.filter(id=id).delete()
+    return redirect('studentlist')
+
+def updateprofile(request,id):
+    student=Student.objects.get(id=id)
+    if request.method=="POST":
+        form=StudentForm(request.POST,instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('studentlist')
+    else:
+        form=StudentForm(instance=student)
+    return render(request,"student/creatprofile.html",{'form':form})
+    

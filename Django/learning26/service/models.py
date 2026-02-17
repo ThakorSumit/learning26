@@ -8,6 +8,14 @@ class serivce(models.Model):
     category = models.CharField(max_length=100)
     rating = models.FloatField()
     review = models.TextField()
+
+    class Meta:
+        db_table = 'services'
+        verbose_name = 'Services'
+        verbose_name_plural = 'Services'
+    def __str__(self):
+        return self.name    
+
     
 
     
