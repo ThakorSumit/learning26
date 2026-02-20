@@ -1,17 +1,23 @@
-/* CAR SCOUT - MERGED DESIGN SYSTEM 
-   Applying "Disruptor Light Mode" to your existing selectors.
+/* CAR SCOUT - DISRUPTOR LIGHT MODE
+   Palette: Cloud Blue Base, Electric Indigo, Slate Ink
+   Vibe: Ultra-Modern, App-like, High-Saturation
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
 :root {
+    /* Instead of gray, we use a saturated Cloud Blue for the background */
     --bg-app: #f0f7ff;
     --bg-card: #ffffff;
     --brand-primary: #4338ca;
+    /* Vivid Indigo */
     --brand-glow: #6366f1;
     --text-header: #0f172a;
+    /* Deep Ink */
     --text-body: #475569;
     --accent-cyan: #06b6d4;
+
+    /* High-end "App" Shadows */
     --shadow-float: 0 0 1px rgba(0, 0, 0, 0.1), 0 12px 24px -4px rgba(0, 0, 0, 0.08);
     --border-glass: rgba(255, 255, 255, 0.7);
 }
@@ -25,6 +31,7 @@
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     background-color: var(--bg-app);
+    /* Subtle mesh gradient to make the light mode feel "expensive" */
     background-image:
         radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
         radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.1) 0px, transparent 50%);
@@ -32,7 +39,7 @@ body {
     min-height: 100vh;
 }
 
-/* --- THE NAVBAR (Pill Style) --- */
+/* --- THE "FLOATING" NAV --- */
 .navbar {
     margin: 20px 5% 0;
     background: rgba(255, 255, 255, 0.8);
@@ -42,7 +49,7 @@ body {
     justify-content: space-between;
     align-items: center;
     border-radius: 100px;
-    /* Transformed your box into a pill */
+    /* Pill shaped nav */
     border: 1px solid var(--border-glass);
     box-shadow: var(--shadow-float);
     position: sticky;
@@ -50,40 +57,46 @@ body {
     z-index: 1000;
 }
 
+/* --- LOGO STYLES --- */
 .logo a {
-    color: var(--text-header);
     text-decoration: none;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 800;
-    letter-spacing: -1px;
-}
-
-/* Added a highlight for the "Scout" part of your logo */
-.logo a::after {
-    content: " Employee Management";
+    letter-spacing: -0.5px;
+    /* Gradient Text Logic */
     background: linear-gradient(135deg, var(--brand-primary), var(--accent-cyan));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: transparent;
+    /* Fallback */
+    display: inline-block;
 }
 
-.nav-links {
-    display: flex;
-    gap: 24px;
+/* Hover effect for the logo */
+.logo a:hover {
+    opacity: 0.8;
+    transform: scale(1.02);
+    transition: all 0.2s ease;
 }
+
+/* Remove unused .logo span if no longer needed, or keep for future use */
 
 .nav-links a {
     color: var(--text-body);
     text-decoration: none;
-    font-size: 0.85rem;
+    margin-left: 24px;
+    font-size: 0.9rem;
     font-weight: 700;
-    transition: 0.2s;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .nav-links a:hover {
     color: var(--brand-primary);
+    transform: translateY(-1px);
 }
 
-/* --- MAIN CONTENT CARD --- */
+/* --- THE MAIN CARD --- */
 .content {
     max-width: 1000px;
     margin: 40px auto;
@@ -92,91 +105,16 @@ body {
     border-radius: 40px;
     border: 1px solid var(--border-glass);
     box-shadow: var(--shadow-float);
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
 }
 
-/* --- BUTTONS & LINKS (Vivid Indigo) --- */
-.content a,
-.content table td a {
-    display: inline-block;
-    background: var(--brand-primary);
-    color: white !important;
-    /* Overriding your black text */
-    padding: 12px 24px;
-    border-radius: 14px;
-    font-weight: 700;
-    text-decoration: none;
-    text-align: center;
-    border: none;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 12px rgba(67, 56, 202, 0.2);
-}
-
-.content form input[type="submit"]:hover,
-.content a:hover,
-.content table td a:hover {
-    transform: scale(1.05) translateY(-2px);
-    background: var(--brand-glow);
-    box-shadow: 0 8px 20px rgba(67, 56, 202, 0.3);
-}
-
-/* --- THE MODERN TABLE --- */
-.content table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 12px;
-    /* Adds space between rows */
-    margin-top: 20px;
-}
-
-.content table th {
-    background-color: transparent;
-    /* Removed black background */
-    color: var(--text-body);
-    padding: 10px 20px;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    text-align: left;
-}
-
-.content table td {
-    background: #f8fbff;
-    padding: 20px;
-    border: 1px solid #eef2ff;
-    border-style: solid none;
-    /* Only top and bottom borders */
-}
-
-.content table td:first-child {
-    border-left: 1px solid #eef2ff;
-    border-radius: 16px 0 0 16px;
-    font-weight: 700;
-    color: var(--brand-primary);
-}
-
-.content table td:last-child {
-    border-right: 1px solid #eef2ff;
-    border-radius: 0 16px 16px 0;
-}
-
-.content table tr:hover td {
-    background: #ffffff;
-    border-color: var(--brand-glow);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
-}
-
-/* --- THE FORM --- */
+/* --- STARTUP VERTICAL FORM --- */
 .content form {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
-    max-width: 500px;
-    width: 100%;
-    margin: 20px auto;
-    padding: 35px;
+    max-width: 460px;
+    margin: 0 auto 50px;
+    padding: 40px;
     background: #f8fbff;
     border-radius: 30px;
     border: 1px solid #e0eaff;
@@ -189,22 +127,133 @@ body {
     color: var(--text-header);
     border-radius: 16px;
     font-size: 1rem;
+    font-weight: 500;
     transition: all 0.2s;
 }
 
 .content form input:focus {
     outline: none;
     border-color: var(--brand-glow);
-    box-shadow: 0 0 15px rgba(99, 102, 241, 0.1);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+    /* Improved focus ring */
 }
 
-/* --- THE FOOTER --- */
-.footer {
-    padding: 60px 10%;
-    background-color: transparent;
-    /* Replaced black with subtle text */
+/* --- THE "VIVID" BUTTON --- */
+.content a,
+.content form button {
+    display: inline-block;
+    /* Ensure anchors behave like buttons */
+    background: var(--brand-primary);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 100px;
+    /* Pill shape for more modern feel */
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
     border: none;
-    color: var(--text-body);
-    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 10px 20px -5px rgba(67, 56, 202, 0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 1rem;
+}
 
+/* Enhanced Hover Effect */
+.content a:hover,
+.content form button:hover {
+    transform: translateY(-4px) scale(1.02);
+    background: var(--brand-glow);
+    box-shadow: 0 20px 30px -10px rgba(99, 102, 241, 0.5);
+    /* Stronger glow */
+}
+
+.content a:active,
+.content form button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px -5px rgba(67, 56, 202, 0.4);
+}
+
+/* --- DATA TABLE (Listing Result) --- */
+.content table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+.content table th {
+    padding: 0 20px;
+    color: var(--text-body);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+}
+
+.content table tr td {
+    background: white;
+    padding: 24px;
+    border-top: 1px solid #f0f4ff;
+    border-bottom: 1px solid #f0f4ff;
+    transition: 0.3s;
+}
+
+/* --- TABLE ACTIONS (Update/Delete) --- */
+.content table td:last-child {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    /* Center buttons */
+    align-items: center;
+}
+
+.content table td a,
+.content table td button {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    border-radius: 8px;
+    background: #eef2ff;
+    color: var(--brand-primary);
+    box-shadow: none;
+    /* Reset main button shadow */
+    border: 1px solid #e0eaff;
+}
+
+.content table td a:hover {
+    background: var(--brand-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(67, 56, 202, 0.2);
+}
+
+/* Specific style for Delete button if you add a class in HTML later
+   For now, we can use nth-child if they are consistent, or just keep them same style */
+.content table td a:nth-child(2) {
+    color: #ef4444;
+    /* Red for Delete */
+    background: #fef2f2;
+    border-color: #fee2e2;
+}
+
+.content table td a:nth-child(2):hover {
+    background: #ef4444;
+    color: white;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.content table tr td:last-child {
+    border-right: 1px solid #f0f4ff;
+    border-radius: 0 20px 20px 0;
+}
+
+.content table tr:hover td {
+    background: #fdfdff;
+    border-color: var(--brand-glow);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+}
+
+/* --- CLEAN FOOTER --- */
+.footer {
+    padding: 80px 10%;
+    text-align: center;
+    color: var(--text-body);
 }
